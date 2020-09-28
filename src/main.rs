@@ -33,8 +33,6 @@ fn check_directory(path: &str, query: &str) {
         println!("{}", file.path().display());
     }
 
-    // im new to rust, but i know theres a better way then this.
-    println!();
-    println!("Total files found: {}", total_files_found);
+    println!("\r\nTotal files found: {}", total_files_found);
     println!("Total files searched: {}", total_files_scanned);
 }
