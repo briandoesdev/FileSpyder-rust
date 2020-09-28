@@ -14,6 +14,7 @@ fn main() {
 
 fn check_directory(path: &str, query: &str) {
     let mut total_files_scanned = 0;
+    let mut total_files_found = 0;
     let mut discovered_files = Vec::new();
 
     for entry in WalkDir::new(path).into_iter().filter_map(|e| e.ok()) {
@@ -22,6 +23,7 @@ fn check_directory(path: &str, query: &str) {
         if entry.metadata().unwrap().is_file() {
             let filename = entry.file_name();
             if filename.eq(query) {
+                total_files_found += 1;
                 discovered_files.push(entry);
             }
         }
@@ -31,5 +33,7 @@ fn check_directory(path: &str, query: &str) {
         println!("{}", file.path().display());
     }
 
+    println!();
+    println!("Total files found: {}", total_files_found);
     println!("Total files searched: {}", total_files_scanned);
 }
